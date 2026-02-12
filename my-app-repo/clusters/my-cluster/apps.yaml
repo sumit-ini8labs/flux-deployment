@@ -1,13 +1,15 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: nginx-app
+  name: flux-system
   namespace: flux-system
+  annotations:
+    kustomize.toolkit.fluxcd.io/prune: Disabled
+    kustomize.toolkit.fluxcd.io/ssa: Ignore
 spec:
-  interval: 1m
-  path: ./apps/nginx
+  interval: 10m0s
+  path: my-app-repo/clusters/my-cluster
   prune: true
   sourceRef:
     kind: GitRepository
     name: my-apps
-  targetNamespace: default
